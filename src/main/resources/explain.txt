@@ -1,0 +1,79 @@
+
+CREATE TABLE `instructor_detail` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `youtube_channel` varchar(128) DEFAULT NULL,
+  `hobby` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `instructor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `instructor_detail_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_DETAIL_idx` (`instructor_detail_id`),
+  CONSTRAINT `FK_DETAIL` FOREIGN KEY (`instructor_detail_id`)
+  REFERENCES `instructor_detail` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+The provided SQL code creates a table named instructor in a relational database.
+Let's break down the code line by line to explain its structure and purpose:
+
+CREATE TABLE instructor (:
+
+This line initiates the creation of a new database table named instructor.
+id int NOT NULL AUTO_INCREMENT,:
+
+This line defines a column named id with the data type int, indicating it will store integer values.
+NOT NULL specifies that this column must always contain a value (it cannot be empty).
+AUTO_INCREMENT is used in some database systems (e.g., MySQL) to automatically generate a unique value
+for each new row inserted into the table. It's often
+used for primary key columns.
+first_name varchar(45) DEFAULT NULL,:
+
+This line defines a column named first_name with the data type varchar(45), allowing it to
+store variable-length character strings (up to 45 characters).
+DEFAULT NULL means that if no value is provided when inserting a new row, the default value will be NULL.
+last_name varchar(45) DEFAULT NULL,:
+
+Similar to the first_name column, this line defines a column named last_name with the same data type and default value settings.
+email varchar(45) DEFAULT NULL,:
+
+This line defines a column named email with the data type varchar(45), suitable for storing email addresses.
+It also has a default value of NULL.
+instructor_detail_id int DEFAULT NULL,:
+
+This line defines a column named instructor_detail_id with the data type int.
+DEFAULT NULL indicates that, by default, this column is set to NULL.
+PRIMARY KEY (id),:
+
+This line designates the id column as the primary key of the instructor table.
+A primary key uniquely identifies each row in the table.
+KEY FK_DETAIL_idx (instructor_detail_id),:
+
+This line creates an index named FK_DETAIL_idx on the instructor_detail_id column. Indexes can improve the
+efficiency of queries involving this column.
+CONSTRAINT FK_DETAIL FOREIGN KEY (instructor_detail_id):
+
+This line defines a foreign key constraint named FK_DETAIL on the instructor_detail_id column. This constraint
+enforces referential integrity between the instructor table and another table (likely named instructor_detail).
+REFERENCES instructor_detail (id):
+
+This part of the constraint specifies that the instructor_detail_id column in the instructor table references the
+      id column in the instructor_detail table. In
+other words, it establishes a relationship between the two tables based on their respective columns.
+ON DELETE NO ACTION ON UPDATE NO ACTION:
+
+These clauses define the actions to take when a referenced row in the instructor_detail table is either deleted or updated. In this case, NO ACTION means that
+no automatic action will be taken. You must handle any related actions manually.
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;:
+
+This closing part of the code specifies additional properties for the table:
+ENGINE=InnoDB: Specifies the storage engine used for the table. InnoDB is a popular choice for supporting transactions and foreign key constraints.
+AUTO_INCREMENT=1: Sets the initial auto-increment value for the id column to 1.
+DEFAULT CHARSET=latin1: Specifies the character set used for text data in the table (in this case, Latin-1).
+In summary, this SQL code creates an instructor table with columns for storing information about instructors, including their names, email addresses, and a
+foreign key reference to another table (instructor_detail). It ensures data integrity through the use of primary keys and foreign key constraints.
